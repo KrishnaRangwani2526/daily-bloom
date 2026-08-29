@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   Apple,
   BarChart3,
@@ -9,7 +9,7 @@ import {
   Repeat,
   Sparkles,
 } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -322,7 +322,6 @@ export function BottomNav() {
           <Link
             key={n.to}
             to={n.to}
-            search={{ date: todayStr() }}
             className="press flex flex-col items-center gap-1 rounded-xl py-1.5 text-[11px] font-semibold text-muted-foreground data-[status=active]:text-primary"
           >
             <n.icon className="size-5" />
@@ -378,12 +377,10 @@ export function AmountDialog({
   );
 }
 
-export function useDateState(initial: string) {
-  const navigate = useNavigate();
-  const [date, setDateRaw] = useState(initial);
-  const setDate = (d: string) => {
-    setDateRaw(d);
-    void navigate({ to: ".", search: { date: d }, replace: true });
-  };
+export function useTrackerDate(initial?: string | undefined) {
+  const [date, setDate] = useState(initial ?? "");
+  useEffect(() => {
+    if (!date) setDate(todayStr());
+  }, [date]);
   return [date, setDate] as const;
 }
