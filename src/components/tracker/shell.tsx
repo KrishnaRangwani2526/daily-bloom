@@ -152,8 +152,8 @@ export function PageHeader({
   icon,
 }: {
   title: string;
-  subtitle?: string;
-  icon?: ReactNode;
+  subtitle?: string | undefined;
+  icon?: ReactNode | undefined;
 }) {
   return (
     <header className="hero-gradient sticky top-0 z-20 rounded-b-3xl px-4 pb-5 pt-4 text-primary-foreground shadow-[var(--shadow-soft)]">
@@ -244,9 +244,9 @@ export function Field({
   label: string;
   value: string;
   onChange: (v: string) => void;
-  type?: string;
-  placeholder?: string;
-  suffix?: string;
+  type?: string | undefined;
+  placeholder?: string | undefined;
+  suffix?: string | undefined;
 }) {
   return (
     <div className="space-y-1.5">
@@ -346,7 +346,7 @@ export function AmountDialog({
   onOpenChange: (v: boolean) => void;
   title: string;
   label: string;
-  suffix?: string;
+  suffix?: string | undefined;
   onSubmit: (value: number) => void;
 }) {
   const [val, setVal] = useState("");
